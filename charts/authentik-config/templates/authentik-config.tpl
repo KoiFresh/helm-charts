@@ -20,6 +20,17 @@ entries: {{ if not (or .providers .applications .groups .patches) -}} []
       {{- include "resolve-attribute" (dict "authentik" $authentik "value" $provider.attrs) | indent 4 }}
 {{- end }} {{/* end range $key, $provider := .providers */}}
 
+{{- range $key, $group := .groups }}
+  
+  - model: authentik_core.group
+    id: {{ $key }}
+    state: present
+    identifiers:
+      name: {{ $key }}
+    attrs:     
+    {{- include "resolve-attribute" (dict "authentik" $authentik "value" $group.attrs) | indent 4 }}
+{{- end }}
+
 {{- range $key, $application := .applications }}
   
   - model: authentik_core.application
@@ -48,17 +59,6 @@ entries: {{ if not (or .providers .applications .groups .patches) -}} []
       group: !Find [ authentik_core.group, [ name, {{ $group }} ]]
     {{- end }}
 {{- end }} {{/* end range $key, $application := .applications */}}
-
-{{- range $key, $group := .groups }}
-  
-  - model: authentik_core.group
-    id: {{ $key }}
-    state: present
-    identifiers:
-      name: {{ $key }}
-    attrs:     
-    {{- include "resolve-attribute" (dict "authentik" $authentik "value" $group.attrs) | indent 4 }}
-{{- end }}
 
 {{- if not (eq (len .patches) 0) }}
 {{- include "resolve-attribute" (dict "authentik" $authentik "value" .patches) }}
