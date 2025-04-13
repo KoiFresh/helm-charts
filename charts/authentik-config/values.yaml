@@ -1,0 +1,96 @@
+# yaml-language-server: $schema=values.schema.json
+
+configmap: authentik-config
+
+default:
+  provider:
+    attrs: &default-provider-attrs
+      access_token_validity: hours=24
+      authorization_flow: $flows.default-provider-authorization-implicit-consent
+      token_validity: hours=24
+      refresh_token_validity: days=30
+      invalidation_flow: $flows.default-provider-invalidation-flow
+  scopes:
+    email-scope: &email-scope
+      $ref:
+        type: authentik_providers_oauth2.scopemapping
+        with:
+          scope_name: email
+    openid-scope: &openid-scope
+      $ref:
+        type: authentik_providers_oauth2.scopemapping
+        with:
+          scope_name: openid
+    profile-scope: &profile-scope
+      $ref:
+        type: authentik_providers_oauth2.scopemapping
+        with:
+          scope_name: profile
+
+authentik:
+  providers: {}
+  #  provider-for-generic-auth:
+  #    type: proxy
+  #    attrs:
+  #      <<: *default-provider-attrs
+  #      mode: forward_domain
+  #      external_host: $AUTHENTIK_GENERIC_AUTH_HOST
+  #      cookie_domain: $AUTHENTIK_GENERIC_AUTH_COOKIE_DOMAIN
+  #      intercept_header_auth: true
+  #      internal_host_ssl_validation: true
+  #  provider-for-grafana:
+  #    type: oauth2
+  #    attrs:
+  #      <<: *default-provider-attrs
+  #      client_type: confidential
+  #      client_id: grafana
+  #      client_secret: $AUTHENTIK_GRAFANA_SECRET
+  #      access_code_validity: minutes=1
+  #      sub_mode: hashed_user_id
+  #      include_claims_in_id_token: true
+  #      issuer_mode: per_provider
+  #      redirect_uris:
+  #        - matching_mode: strict
+  #          url: $AUTHENTIK_GRAFANA_HOST
+  #      property_mappings:
+  #        - *email-scope
+  #        - *openid-scope
+  #        - *profile-scope
+
+  applications: {}
+  #  generic-auth:
+  #    name: Generic Auth
+  #    attrs:
+  #      policy_engine_mode: any
+  #      provider: $providers.provider-for-generic-auth
+  #      slug: generic-auth
+  #      meta_launch_url: blank://blank
+  #    groups:
+  #      - default-group
+  #  grafana:
+  #    name: Grafana
+  #    attrs:
+  #      policy_engine_mode: any
+  #      provider: $providers.provider-for-grafana
+  #      slug: grafana
+  #      icon: https://grafana.home.mayer.sh/public/img/grafana_icon.svg
+  #    groups:
+  #      - default-group
+
+  groups: {}
+  #  default-group:
+  #    attrs:
+  #      is_superuser: false
+
+  patches: []
+  #  - identifiers:
+  #      pk:
+  #        $ref:
+  #          type: authentik_outposts.outpost
+  #          with:
+  #            name: authentik Embedded Outpost
+  #    model: authentik_outposts.outpost
+  #    attrs:
+  #      providers:
+  #        - $providers.provider-for-generic-auth
+  #        - $providers.provider-for-grafana
