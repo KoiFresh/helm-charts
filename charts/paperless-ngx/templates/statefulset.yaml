@@ -1,0 +1,190 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "paperless.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "paperless.labels" . | nindent 4 }}
+spec:
+  serviceName: {{ include "paperless.fullname" . }}
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "paperless.selectorLabels" . | nindent 6 }}
+  {{- if .Values.strategy -}}
+  updateStrategy:
+  {{- toYaml .Values.strategy | nindent 4 }}
+  {{- end }}
+  template:
+    metadata:
+      {{- if .Values.podAnnotations }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        checksum/secrets: {{ include (print $.Template.BasePath "/secrets.yaml") . | sha256sum }}
+        {{- if .Values.podAnnotations }}
+        {{- toYaml .Values.podAnnotations | nindent 8 }}
+        {{- end }}
+      {{- end }}
+      labels:
+        {{- include "paperless.selectorLabels" . | nindent 8 }}
+        {{- if .Values.podLabels }}
+        {{- toYaml .Values.podLabels | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- if .Values.image.pullSecrets }}
+      imagePullSecrets:
+        {{- toYaml .Values.image.pullSecrets | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "paperless.serviceAccountName" . }}
+      automountServiceAccountToken: {{ .Values.serviceAccount.automount }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "paperless.configmaps.general" . }}
+          env:
+            - name: PAPERLESS_REDIS
+              valueFrom:
+                secretKeyRef:
+                  name: {{ default (include "paperless.secrets.redis" .) .Values.paperless.redis.existingSecret }}
+                  key: uri
+            - name: PAPERLESS_DBUSER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ default (include "paperless.secrets.postgresql" .) .Values.paperless.postgresql.existingSecret }}
+                  key: username
+            - name: PAPERLESS_DBPASS
+              valueFrom:
+                secretKeyRef:
+                  name: {{ default (include "paperless.secrets.postgresql" .) .Values.paperless.postgresql.existingSecret }}
+                  key: password
+            {{- if or .Values.paperless.secretKey.value .Values.paperless.secretKey.existingSecret.name }}
+            - name: PAPERLESS_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ default (include "paperless.secrets.general" .) .Values.paperless.secretKey.existingSecret.name }}
+                  key: {{ default "secretKey" .Values.paperless.secretKey.existingSecret.key }}
+            {{- end }}
+            {{- if or (or .Values.paperless.auth.adminUser .Values.paperless.auth.adminPassword) .Values.paperless.auth.existingSecret }}
+            - name: PAPERLESS_ADMIN_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ default (include "paperless.secrets.admin" .) .Values.paperless.auth.existingSecret }}
+                  key: username
+            - name: PAPERLESS_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ default (include "paperless.secrets.admin" .) .Values.paperless.auth.existingSecret }}
+                  key: password
+            {{- end }}
+            {{- if or (or .Values.paperless.smtp.user .Values.paperless.smtp.password) .Values.paperless.smtp.existingSecret }}
+            - name: PAPERLESS_EMAIL_HOST_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ default (include "paperless.secrets.smtp" .) .Values.paperless.smtp.existingSecret }}
+                  key: username
+            - name: PAPERLESS_EMAIL_HOST_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ default (include "paperless.secrets.smtp" .) .Values.paperless.smtp.existingSecret }}
+                  key: password
+            {{- end }}
+            {{- if (or .Values.paperless.auth.social.accountProviders .Values.paperless.auth.social.existingSecret ) }}
+            - name: PAPERLESS_SOCIALACCOUNT_PROVIDERS
+              valueFrom:
+                secretKeyRef:
+                  name: {{ default (include "paperless.secrets.allauth" .) .Values.paperless.auth.social.existingSecret }}
+                  key: accountProviders
+            {{- end }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.paperless.port }}
+              protocol: TCP
+          volumeMounts:
+              {{- $dataDir := .Values.paperless.data.paths.dataDir | default "data" }}
+              {{- $mediaDir := .Values.paperless.data.paths.mediaRoot | default "media" }}
+            - name: {{ include "paperless.pv.data.name" . }}
+              mountPath: {{ include "paperless.paths.base" (dict "path"  $dataDir) }}
+              subPath: data
+            - name: {{ include "paperless.pv.data.name" . }}
+              mountPath: {{ include "paperless.paths.base" (dict "path"  $mediaDir) }}
+              subPath: media
+          {{- if .Values.volumeMounts }}
+            {{- toYaml .Values.volumeMounts | nindent 12 }}
+          {{- end }}
+          {{- if .Values.resources }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          {{- end }}
+          {{- if .Values.securityContext }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          {{- end }}
+          {{- if .Values.livenessProbe.enabled }}
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.livenessProbe.successThreshold }}
+            failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+          {{- end }}
+          {{- if .Values.readinessProbe.enabled }}
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.readinessProbe.successThreshold }}
+            failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
+          {{- end }}
+          {{- if .Values.startupProbe.enabled }}
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: {{ .Values.startupProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.startupProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.startupProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.startupProbe.successThreshold }}
+            failureThreshold: {{ .Values.startupProbe.failureThreshold }}
+          {{- end }}
+      volumes:
+        - name: {{ include "paperless.pv.data.name" . }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.paperless.data.pvc.existingClaim | default (include "paperless.pvc.data.name" .) }}
+      {{- if .Values.priorityClassName }}
+      priorityClassName: {{ .Values.priorityClassName }}
+      {{- end }}
+      {{- if .Values.volumes }}
+        {{- toYaml .Values.volumes | nindent 8 }}
+      {{- end }}
+      {{- if .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml .Values.nodeSelector | nindent 8 }}
+      {{- end }}
+      {{- if .Values.affinity }}
+      affinity:
+        {{- toYaml .Values.affinity | nindent 8 }}
+      {{- end }}
+      {{- if .Values.tolerations }}
+      tolerations:
+        {{- toYaml .Values.tolerations | nindent 8 }}
+      {{- end }}
+      {{- if .Values.podSecurityContext }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- end }}
+      {{- if .Values.initContainers }}
+      initContainers:
+        {{- toYaml .Values.initContainers | nindent 8 }}
+      {{- end }}
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: {{ .Values.paperless.data.pvc.reclaimPolicy }}
+    whenScaled: {{ .Values.paperless.data.pvc.reclaimPolicy }}
