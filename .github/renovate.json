@@ -1,0 +1,22 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "platform": "github",
+  "labels": [
+    "renovatebot"
+  ],
+  "extends": [
+    "config:recommended"
+  ],
+  "repositories": [
+    "koifresh/helm-charts"
+  ],
+  "gitAuthor": "Renovate Bot <homelab@mayer.sh>",
+  "assignees": [
+    "koifresh"
+  ],
+  "helmv3": {
+    "managerFilePatterns": [
+      "/(^|/)Chart\\.ya?ml$/"
+    ]
+  }
+}
