@@ -1,0 +1,71 @@
+apiVersion: v1
+entries:
+  gotenberg:
+  - apiVersion: v2
+    appVersion: 8.7.0
+    created: "2026-02-08T20:40:06.637147166Z"
+    description: Gotenberg is a Docker-powered stateless API for PDF files.
+    digest: 8fb7397af472ddff5b5a6fd988111948e46dabdd2cf75334270db0780b41bba5
+    home: https://gotenberg.dev/
+    icon: https://user-images.githubusercontent.com/8983173/130322857-185831e2-f041-46eb-a17f-0a69d066c4e5.png
+    keywords:
+    - documents
+    - conversion
+    - pdf
+    - office
+    - html
+    - markdown
+    kubeVersion: '>=1.26.0-0'
+    maintainers:
+    - email: kai@mayer.sh
+      name: KoiFresh
+    name: gotenberg
+    sources:
+    - https://github.com/koifresh/helm-charts
+    urls:
+    - https://github.com/KoiFresh/helm-charts/releases/download/gotenberg-0.2.2/gotenberg-0.2.2.tgz
+    version: 0.2.2
+  paperless-ngx:
+  - apiVersion: v2
+    appVersion: 2.10.1
+    created: "2026-02-08T20:40:06.781396078Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: ~15.5
+    - condition: redis.enabled
+      name: redis
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: ~19.5
+    - condition: tika.enabled
+      name: tika
+      repository: https://apache.jfrog.io/artifactory/tika
+      version: ~2.9
+    - condition: gotenberg.enabled
+      name: gotenberg
+      repository: oci://ghcr.io/fmjstudios/helm
+      version: ~0.0.1
+    description: Paperless-NGX is a community-supported supercharged version of paperless
+      - scan, index and archive all your physical documents
+    digest: f8a659e7e35964047b4840860db93131231a0b499d4a0d0f2d2f98dd5141fc6f
+    home: https://github.com/paperless-ngx/paperless-ngx
+    icon: https://raw.githubusercontent.com/fmjstudios/artwork/76af35c64fd93c12e851925b0d3801e89978f05a/projects/paperless-ngx/icon/color/paperless-ngx-icon-color.png
+    keywords:
+    - documents
+    - archival
+    - ocr
+    - conversion
+    - paper
+    - paperless
+    kubeVersion: '>=1.26.0-0'
+    maintainers:
+    - email: kai@mayer.sh
+      name: KoiFresh
+    name: paperless-ngx
+    sources:
+    - https://github.com/koifresh/helm-charts
+    urls:
+    - https://github.com/KoiFresh/helm-charts/releases/download/paperless-ngx-0.2.7/paperless-ngx-0.2.7.tgz
+    version: 0.2.7
+generated: "2026-02-08T20:40:06.781404294Z"
