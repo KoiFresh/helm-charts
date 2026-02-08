@@ -5,7 +5,7 @@ apiVersion: v2
 appVersion: 2.10.1
 kubeVersion: ">=1.26.0-0"
 name: paperless-ngx
-version: 0.2.7
+version: 0.2.8
 dependencies:
   - name: postgresql
     repository: oci://registry-1.docker.io/bitnamicharts
@@ -20,9 +20,9 @@ dependencies:
     condition: tika.enabled
     version: ~2.9
   - name: gotenberg
-    repository: oci://ghcr.io/fmjstudios/helm
+    repository: https://koifresh.github.io/helm-charts
     condition: gotenberg.enabled
-    version: ~0.0.1
+    version: ~0.2.2
 description: Paperless-NGX is a community-supported supercharged version of paperless - scan, index and archive all your physical documents
 home: https://github.com/paperless-ngx/paperless-ngx
 icon: https://raw.githubusercontent.com/fmjstudios/artwork/76af35c64fd93c12e851925b0d3801e89978f05a/projects/paperless-ngx/icon/color/paperless-ngx-icon-color.png
