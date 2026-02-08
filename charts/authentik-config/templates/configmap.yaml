@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: "{{ .Values.configmap }}"
-data:
-  authentik-config.yaml: |-
-    {{- include "authentik-config" . | indent 4 }}
