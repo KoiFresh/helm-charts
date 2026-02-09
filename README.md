@@ -15,7 +15,7 @@ helm repo add koifresh https://koifresh.github.io/helm-charts
 helm install <RELEASE_NAME> koifresh/<CHART_NAME>
 ```
 
-### OCI Installation (TBD)
+### OCI Installation
 
 ```shell
 helm install oci://ghcr.io/koifresh/helm-charts/<CHART_NAME>:<VERSION>
