@@ -44,5 +44,6 @@ jobs:
             if [ -z "${pkg:-}" ]; then
               break
             fi
+            echo "Pushing ${pkg} to GHCR..."
             helm push "${pkg}" "oci://ghcr.io/${GITHUB_REPOSITORY_OWNER}/helm-charts"
           done
