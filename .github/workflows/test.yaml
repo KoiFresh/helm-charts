@@ -1,0 +1,32 @@
+name: Test Charts
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.0.2
+        with:
+          fetch-depth: 0
+      - name: Setup Helm
+        uses: azure/setup-helm@v4.3.1
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.x'
+      
+      - name: Setup Chart-Testing
+        uses: helm/chart-testing-action@v2.8.0
+
+      - name: Run Chart-Testing (lint)
+        run: ct lint --config config/ct-config.yaml
