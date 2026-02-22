@@ -18,7 +18,7 @@ dependencies:
   - name: tika
     repository: https://apache.jfrog.io/artifactory/tika
     condition: tika.enabled
-    version: ~3.2.0
+    version: ~3.2.2
   - name: gotenberg
     repository: https://koifresh.github.io/helm-charts
     condition: gotenberg.enabled
