@@ -3,6 +3,30 @@ entries:
   gotenberg:
   - apiVersion: v2
     appVersion: 8.27.0
+    created: "2026-04-03T08:14:09.565529665Z"
+    description: Gotenberg is a Docker-powered stateless API for PDF files.
+    digest: 8614fa3de216375e36ce0a86f531fd7904f770e6a32a3f3a82d02ecf5df4969a
+    home: https://gotenberg.dev/
+    icon: https://user-images.githubusercontent.com/8983173/130322857-185831e2-f041-46eb-a17f-0a69d066c4e5.png
+    keywords:
+    - documents
+    - conversion
+    - pdf
+    - office
+    - html
+    - markdown
+    kubeVersion: '>=1.26.0-0'
+    maintainers:
+    - email: kai@mayer.sh
+      name: KoiFresh
+    name: gotenberg
+    sources:
+    - https://github.com/koifresh/helm-charts
+    urls:
+    - https://github.com/KoiFresh/helm-charts/releases/download/gotenberg-0.2.5/gotenberg-0.2.5.tgz
+    version: 0.2.5
+  - apiVersion: v2
+    appVersion: 8.27.0
     created: "2026-02-27T23:16:42.904800265Z"
     description: Gotenberg is a Docker-powered stateless API for PDF files.
     digest: 8e787554b43416c6d3f3ffc0717f8963fe4a331643d2b4ff7b20a65c0ff76d56
@@ -368,4 +392,4 @@ entries:
     urls:
     - https://github.com/KoiFresh/helm-charts/releases/download/paperless-ngx-0.2.7/paperless-ngx-0.2.7.tgz
     version: 0.2.7
-generated: "2026-04-03T08:12:01.764545511Z"
+generated: "2026-04-03T08:14:09.565581803Z"
