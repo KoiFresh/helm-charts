@@ -100,6 +100,48 @@ entries:
   paperless-ngx:
   - apiVersion: v2
     appVersion: 2.20.10
+    created: "2026-04-04T08:49:47.098352049Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: ~15.5
+    - condition: redis.enabled
+      name: redis
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: ~19.5
+    - condition: tika.enabled
+      name: tika
+      repository: https://apache.jfrog.io/artifactory/tika
+      version: ~3.2.2
+    - condition: gotenberg.enabled
+      name: gotenberg
+      repository: https://koifresh.github.io/helm-charts
+      version: ~0.2.2
+    description: Paperless-NGX is a community-supported supercharged version of paperless
+      - scan, index and archive all your physical documents
+    digest: 1d3336068fc9396b4e4b4b081f72187ddef1569861fd10005c0d4688c27b9a0e
+    home: https://github.com/paperless-ngx/paperless-ngx
+    icon: https://raw.githubusercontent.com/fmjstudios/artwork/76af35c64fd93c12e851925b0d3801e89978f05a/projects/paperless-ngx/icon/color/paperless-ngx-icon-color.png
+    keywords:
+    - documents
+    - archival
+    - ocr
+    - conversion
+    - paper
+    - paperless
+    kubeVersion: '>=1.26.0-0'
+    maintainers:
+    - email: kai@mayer.sh
+      name: KoiFresh
+    name: paperless-ngx
+    sources:
+    - https://github.com/koifresh/helm-charts
+    urls:
+    - https://github.com/KoiFresh/helm-charts/releases/download/paperless-ngx-0.3.7/paperless-ngx-0.3.7.tgz
+    version: 0.3.7
+  - apiVersion: v2
+    appVersion: 2.20.10
     created: "2026-04-04T08:48:44.650437351Z"
     dependencies:
     - condition: postgresql.enabled
@@ -476,4 +518,4 @@ entries:
     urls:
     - https://github.com/KoiFresh/helm-charts/releases/download/paperless-ngx-0.2.7/paperless-ngx-0.2.7.tgz
     version: 0.2.7
-generated: "2026-04-04T08:48:44.650482418Z"
+generated: "2026-04-04T08:49:47.098403305Z"
