@@ -1080,7 +1080,7 @@ redis:
     repository: library/redis
     ## @param redis.image.tag Tag for the redis container image
     ##
-    tag: 7.2.5-bookworm
+    tag: 7.4.8-bookworm
   ## @param redis.architecture Redis&reg; architecture. Allowed values: `standalone` or `replication`
   ##
   architecture: standalone
