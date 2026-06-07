@@ -19,7 +19,8 @@
 image:
   registry: docker.io
   repository: gotenberg/gotenberg
-  tag: 8.32.0
+  # Defaults to AppVersion
+  tag: ""
   digest: ""
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
