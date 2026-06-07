@@ -3,6 +3,10 @@ on:
   workflow_dispatch: {}
   schedule:
     - cron: "0 4 * * *"
+  pull_request:
+    paths:
+      - .github/renovate.json
+      - .github/workflows/renovate-bot.yaml
 
 jobs:
   renovate:
