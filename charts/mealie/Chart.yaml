@@ -1,0 +1,22 @@
+apiVersion: v2
+appVersion: 3.19.2
+kubeVersion: ">=1.26.0-0"
+name: mealie
+version: 0.1.0
+dependencies:
+  - name: postgresql
+    repository: oci://registry-1.docker.io/bitnamicharts
+    condition: postgresql.enabled
+    version: ~15.1
+description: Mealie is a self hosted recipe manager and meal planner with a RestAPI backend and a reactive frontend application built in Vue for a pleasant user experience for the whole family. Easily add recipes into your database by providing the url and mealie will automatically import the relevant data or add a family recipe with the UI editor
+home: https://github.com/mealie-recipes/mealie
+icon: https://raw.githubusercontent.com/mealie-recipes/mealie/refs/heads/mealie-next/docs/docs/assets/img/favicon.png
+keywords:
+  - self-hosted
+  - recipe-manager
+  - meal-plans
+sources:
+  - "https://github.com/koifresh/helm-charts"
+maintainers:
+  - name: koifresh
+    email: kai@mayer.sh

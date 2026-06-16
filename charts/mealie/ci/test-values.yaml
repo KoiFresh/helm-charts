@@ -1,0 +1,22 @@
+ingress:
+  enabled: true
+  className: "nginx"
+  annotations:
+    cert-manager.io/cluster-issuer: mkcert-development-issuer
+  host: mealie.helm.private
+  tls:
+    - secretName: mealie-ingress-tls
+      hosts:
+        - mealie.helm.private
+
+livenessProbe:
+  enabled: true
+
+readinessProbe:
+  enabled: true
+
+startupProbe:
+  enabled: true
+
+autoscaling:
+  enabled: true
