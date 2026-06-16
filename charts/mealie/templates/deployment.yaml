@@ -38,9 +38,9 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: PUID
-              value: {{ .Values.mealie.uid }}
+              value: {{ .Values.mealie.puid | quote }}
             - name: GUID
-              value: {{ .Values.mealie.guid }}
+              value: {{ .Values.mealie.guid | quote }}
             - name: TZ
               value: {{ .Values.mealie.timeZone }}
             {{- if .Values.ingress.enabled }}
@@ -53,7 +53,7 @@ spec:
               valueFrom:
                 {{- toYaml $value | nindent 16 }}
               {{- else }}
-              value: {{ $value }}
+              value: {{ $value | quote }}
               {{- end }}
             {{- end }}
           {{- if .Values.mealie.envFrom }}

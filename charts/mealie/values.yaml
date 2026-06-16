@@ -50,7 +50,7 @@ fullnameOverride: ""
 ## ref: https://docs.mealie.io/documentation/getting-started/installation/backend-config/
 mealie:
   # PUID
-  uid: 1000
+  puid: 1000
   # PGUID
   guid: 1000
   port: 80
