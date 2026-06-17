@@ -21,23 +21,13 @@ helm install <RELEASE_NAME> koifresh/<CHART_NAME>
 helm install oci://ghcr.io/koifresh/helm-charts/<CHART_NAME>:<VERSION>
 ```
 
-## 📖 Overview
+## 📖 Charts
 
-<div align="center">
-
-| Chart                                                                                                                                                                                                                                                                  | Current Version | Default Container Images                            |
-| :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------: | --------------------------------------------------- |
-| [Gotenberg <img src="https://user-images.githubusercontent.com/8983173/130322857-185831e2-f041-46eb-a17f-0a69d066c4e5.png" alt="Gotenberg Logo" width="32px" height="32px" align="right" loading="lazy">][gotenberg_chart]                                             |      0.2.2      | [gotenberg/gotenberg][gotenberg_images]             |
-| [Paperless-NGX <img src="https://raw.githubusercontent.com/paperless-ngx/paperless-ngx/5842944d1ef817c11a47ed5c19ba8b7886c9fbfe/resources/logo/web/svg/square.svg" alt="Paperless-NGX Logo" width="32px" height="32px" align="right" loading="lazy">][paperless_chart] |      0.3.0      | [paperless-ngx/paperless-ngx][paperless_ngx_images] |
-
-</div>
+- [Gotenberg](./charts/gotenberg/)
+- [Paperless-NGX](./charts/paperless-ngx/)
+- [Mealie](./charts/mealie/)
 
 <!-- INTERNAL REFERENCES -->
-
-<!-- Chart references -->
-
-[gotenberg_chart]: charts/gotenberg
-[paperless_chart]: charts/paperless-ngx
 
 <!-- File references -->
 
@@ -46,8 +36,3 @@ helm install oci://ghcr.io/koifresh/helm-charts/<CHART_NAME>:<VERSION>
 <!-- General links -->
 
 [helm]: https://helm.sh
-
-<!-- Overview links -->
-
-[gotenberg_images]: https://hub.docker.com/r/gotenberg/gotenberg
-[paperless_ngx_images]: https://github.com/paperless-ngx/paperless-ngx/pkgs/container/paperless-ngx
