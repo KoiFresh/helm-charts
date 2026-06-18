@@ -264,6 +264,11 @@ postgresql:
   # -- Enable or disable the PostgreSQL subchart
   enabled: true
 
+  global:
+    security:
+      # -- Enable insecure images ref: https://github.com/bitnami/charts/issues/30850
+      allowInsecureImages: true
+
   # -- Image configuration for the postgres container. Use the official postgres image by default, instead of the bitnami image.
   image:
     # -- Registry for the postgres container image
