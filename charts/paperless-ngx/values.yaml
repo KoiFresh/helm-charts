@@ -977,6 +977,11 @@ securityContext: {}
 ## PostgreSQL configuration
 ## ref: https://github.com/bitnami/charts/blob/main/bitnami/postgresql/values.yaml
 postgresql:
+  global:
+    security:
+      # -- Enable insecure images ref: https://github.com/bitnami/charts/issues/30850
+      allowInsecureImages: true
+
   ## @param postgresql.enabled Enable or disable the PostgreSQL subchart
   ##
   enabled: true
