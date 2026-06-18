@@ -273,7 +273,7 @@ postgresql:
     repository: library/postgres
 
     # -- Tag for the postgres container image
-    tag: 16.13-bookworm
+    tag: 18.4-bookworm
 
   ## Authentication parameters
   ## ref: https://github.com/bitnami/containers/tree/main/bitnami/postgresql#setting-the-root-password-on-first-run
