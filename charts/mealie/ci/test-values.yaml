@@ -17,6 +17,3 @@ readinessProbe:
 
 startupProbe:
   enabled: true
-
-autoscaling:
-  enabled: true

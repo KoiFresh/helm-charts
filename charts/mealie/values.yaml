@@ -202,10 +202,14 @@ resources: {}
 #   memory: 128Mi
 
 # -- Define volumes for the mealie pod
-volumes: []
+extraVolumes: []
+#  - name: data
+#    emptyDir: {}
 
 # -- Define volumeMounts for the mealie pod
-volumeMounts: []
+extraVolumeMounts: []
+#  - name: data
+#    mountPath: /data
 
 # -- Define initContainers for the main mealie pod
 initContainers: []

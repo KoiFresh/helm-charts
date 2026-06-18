@@ -34,6 +34,8 @@ Kubernetes: `>=1.26.0-0`
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` | Affinity for pod assignment ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity |
+| extraVolumeMounts | list | `[]` | Define volumeMounts for the mealie pod |
+| extraVolumes | list | `[]` | Define volumes for the mealie pod |
 | fullnameOverride | string | `""` | String to fully override mealie.fullname |
 | image.digest | string | `""` | The image digest to pull |
 | image.pullPolicy | string | `"IfNotPresent"` | The Kubernetes image pull policy |
@@ -44,7 +46,7 @@ Kubernetes: `>=1.26.0-0`
 | ingress.annotations | object | `{}` | Annotations for the Ingress resource |
 | ingress.className | string | `""` | The IngressClass to use for the pod's ingress |
 | ingress.enabled | bool | `false` | Whether to enable Ingress |
-| ingress.host | string | `"mealie.helm.private"` | The host mealie listens to  |
+| ingress.host | string | `"mealie.helm.private"` | The host mealie listens to |
 | ingress.tls | list | `[]` | A list of hostnames and secret names to use for TLS |
 | initContainers | list | `[]` | Define initContainers for the main mealie pod |
 | livenessProbe.enabled | bool | `false` | Enable or disable the use of liveness probes |
@@ -116,5 +118,3 @@ Kubernetes: `>=1.26.0-0`
 | startupProbe.timeoutSeconds | int | `1` | Configure the initial delay seconds for the startup probe |
 | strategy | object | `{}` | Specify a deployment strategy for the Mealie pod |
 | tolerations | list | `[]` | Tolerations for pod assignment ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/ |
-| volumeMounts | list | `[]` | Define volumeMounts for the mealie pod |
-| volumes | list | `[]` | Define volumes for the mealie pod |
