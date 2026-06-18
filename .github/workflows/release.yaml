@@ -29,6 +29,7 @@ jobs:
         run: |
           helm repo add bitnami https://charts.bitnami.com/bitnami
           helm repo add tika https://apache.jfrog.io/artifactory/tika
+          helm repo add koifresh https://koifresh.github.io/helm-charts
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.7.0
