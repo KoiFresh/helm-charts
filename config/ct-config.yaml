@@ -6,3 +6,4 @@ chart-dirs:
 chart-repos:
   - bitnami=https://charts.bitnami.com/bitnami
   - tika=https://apache.jfrog.io/artifactory/tika
+  - koifresh=https://koifresh.github.io/helm-charts

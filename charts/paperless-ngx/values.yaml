@@ -425,7 +425,7 @@ paperless:
       size: 10Gi
       ## @param paperless.data.pvc.storageClass [default: standard] The storageClass given to PVCs created from the above data
       ##
-      storageClass: standard
+      storageClass: ""
       ## @param paperless.data.pvc.reclaimPolicy [default: Retain] The resourcePolicy given to PVCs created from the above data
       ##
       reclaimPolicy: Retain
@@ -977,6 +977,11 @@ securityContext: {}
 ## PostgreSQL configuration
 ## ref: https://github.com/bitnami/charts/blob/main/bitnami/postgresql/values.yaml
 postgresql:
+  global:
+    security:
+      # -- Enable insecure images ref: https://github.com/bitnami/charts/issues/30850
+      allowInsecureImages: true
+
   ## @param postgresql.enabled Enable or disable the PostgreSQL subchart
   ##
   enabled: true
@@ -990,7 +995,7 @@ postgresql:
     repository: library/postgres
     ## @param postgresql.image.tag Tag for the postgres container image
     ##
-    tag: 16.13-bookworm
+    tag: 16.14-bookworm
   ## Authentication parameters
   ## ref: https://github.com/bitnami/containers/tree/main/bitnami/postgresql#setting-the-root-password-on-first-run
   ## ref: https://github.com/bitnami/containers/tree/main/bitnami/postgresql#creating-a-database-on-first-run

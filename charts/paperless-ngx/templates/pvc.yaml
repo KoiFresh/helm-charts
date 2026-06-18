@@ -13,7 +13,7 @@ metadata:
     helm.sh/resource-policy: keep
     {{- end }}
 spec:
-  storageClassName: {{ .Values.paperless.data.pvc.storageClass | default "standard" }}
+  storageClassName: {{ .Values.paperless.data.pvc.storageClass }}
   accessModes:
     - ReadWriteOnce
   resources:

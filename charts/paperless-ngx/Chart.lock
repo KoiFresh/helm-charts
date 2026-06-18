@@ -1,0 +1,15 @@
+dependencies:
+- name: postgresql
+  repository: oci://registry-1.docker.io/bitnamicharts
+  version: 16.7.27
+- name: redis
+  repository: oci://registry-1.docker.io/bitnamicharts
+  version: 19.5.5
+- name: tika
+  repository: https://apache.jfrog.io/artifactory/tika
+  version: 3.2.2
+- name: gotenberg
+  repository: https://koifresh.github.io/helm-charts
+  version: 0.2.8
+digest: sha256:9f53356f9a6d0cb114838dda1eaf46fb9618690f01f48695a1234a39207880af
+generated: "2026-06-18T23:27:34.618092667+02:00"
