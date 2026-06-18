@@ -169,7 +169,82 @@ entries:
     urls:
     - https://github.com/KoiFresh/helm-charts/releases/download/gotenberg-0.2.2/gotenberg-0.2.2.tgz
     version: 0.2.2
+  mealie:
+  - apiVersion: v2
+    appVersion: 3.19.2
+    created: "2026-06-18T22:48:00.695690191Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: ~18.7
+    description: Mealie is a self hosted recipe manager and meal planner with a RestAPI
+      backend and a reactive frontend application built in Vue for a pleasant user
+      experience for the whole family. Easily add recipes into your database by providing
+      the url and mealie will automatically import the relevant data or add a family
+      recipe with the UI editor
+    digest: f8e874a6cd1ad5a845997e7e7be9949658d005ccfb6301c569be96a14b5afebf
+    home: https://github.com/mealie-recipes/mealie
+    icon: https://raw.githubusercontent.com/mealie-recipes/mealie/refs/heads/mealie-next/docs/docs/assets/img/favicon.png
+    keywords:
+    - self-hosted
+    - recipe-manager
+    - meal-plans
+    kubeVersion: '>=1.26.0-0'
+    maintainers:
+    - email: kai@mayer.sh
+      name: koifresh
+      url: https://mayer.sh/
+    name: mealie
+    sources:
+    - https://github.com/koifresh/helm-charts
+    urls:
+    - https://github.com/KoiFresh/helm-charts/releases/download/mealie-0.1.0/mealie-0.1.0.tgz
+    version: 0.1.0
   paperless-ngx:
+  - apiVersion: v2
+    appVersion: 2.20.15
+    created: "2026-06-18T22:48:00.847499129Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: ~16.7
+    - condition: redis.enabled
+      name: redis
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: ~19.5
+    - condition: tika.enabled
+      name: tika
+      repository: https://apache.jfrog.io/artifactory/tika
+      version: ~3.2.2
+    - condition: gotenberg.enabled
+      name: gotenberg
+      repository: https://koifresh.github.io/helm-charts
+      version: ~0.2.2
+    description: Paperless-NGX is a community-supported supercharged version of paperless
+      - scan, index and archive all your physical documents
+    digest: 242a5e4c926c01d39f9d190360f52c1b19e26c6a9d5dfbb953eee20c34384e33
+    home: https://github.com/paperless-ngx/paperless-ngx
+    icon: https://raw.githubusercontent.com/fmjstudios/artwork/76af35c64fd93c12e851925b0d3801e89978f05a/projects/paperless-ngx/icon/color/paperless-ngx-icon-color.png
+    keywords:
+    - documents
+    - archival
+    - ocr
+    - conversion
+    - paper
+    - paperless
+    kubeVersion: '>=1.26.0-0'
+    maintainers:
+    - email: kai@mayer.sh
+      name: KoiFresh
+      url: https://mayer.sh/
+    name: paperless-ngx
+    sources:
+    - https://github.com/koifresh/helm-charts
+    urls:
+    - https://github.com/KoiFresh/helm-charts/releases/download/paperless-ngx-0.4.0/paperless-ngx-0.4.0.tgz
+    version: 0.4.0
   - apiVersion: v2
     appVersion: 2.20.10
     created: "2026-05-07T19:39:14.314772715Z"
@@ -674,4 +749,4 @@ entries:
     urls:
     - https://github.com/KoiFresh/helm-charts/releases/download/paperless-ngx-0.2.7/paperless-ngx-0.2.7.tgz
     version: 0.2.7
-generated: "2026-06-07T08:31:23.932835106Z"
+generated: "2026-06-18T22:48:00.847575442Z"
