@@ -2,15 +2,15 @@
 # SPDX-License-Identifier: MIT
 
 apiVersion: v2
-appVersion: 2.20.10
+appVersion: 2.20.15
 kubeVersion: ">=1.26.0-0"
 name: paperless-ngx
-version: 0.3.9
+version: 0.3.10
 dependencies:
   - name: postgresql
     repository: oci://registry-1.docker.io/bitnamicharts
     condition: postgresql.enabled
-    version: ~15.5
+    version: ~16.7
   - name: redis
     repository: oci://registry-1.docker.io/bitnamicharts
     condition: redis.enabled
@@ -38,3 +38,4 @@ sources:
 maintainers:
   - name: KoiFresh
     email: kai@mayer.sh
+    url: https://mayer.sh/
