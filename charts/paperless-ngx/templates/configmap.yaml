@@ -172,20 +172,8 @@ data:
   PAPERLESS_DBHOST: {{ (include "paperless.postgresql.host" .) | quote }}
   PAPERLESS_DBPORT: {{ .Values.paperless.postgresql.port | quote }}
   PAPERLESS_DBNAME: {{ .Values.paperless.postgresql.name | quote }}
-  {{- if .Values.paperless.postgresql.sslMode }}
-  PAPERLESS_DBSSLMODE: {{ .Values.paperless.postgresql.sslMode | quote }}
-  {{- end }}
-  {{- if .Values.paperless.postgresql.certs.rootCert }}
-  PAPERLESS_DBSSLROOTCERT: {{ .Values.paperless.postgresql.certs.rootCert | quote }}
-  {{- end }}
-  {{- if .Values.paperless.postgresql.certs.cert }}
-  PAPERLESS_DBSSLCERT: {{ .Values.paperless.postgresql.certs.cert | quote }}
-  {{- end }}
-  {{- if .Values.paperless.postgresql.certs.key }}
-  PAPERLESS_DBSSLKEY: {{ .Values.paperless.postgresql.certs.key | quote }}
-  {{- end }}
-  {{- if .Values.paperless.postgresql.timeout }}
-  PAPERLESS_DB_TIMEOUT: {{ .Values.paperless.postgresql.timeout }}
+  {{- if .Values.paperless.postgresql.options }}
+  PAPERLESS_DB_OPTIONS: {{ .Values.paperless.postgresql.options | quote }}
   {{- end }}
   {{- /*
     Tika configuration

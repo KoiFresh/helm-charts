@@ -424,35 +424,10 @@
                             "description": "An existing BasicAuth secret containing the PostgreSQL credentials",
                             "default": "\"\""
                         },
-                        "sslMode": {
+                        "options": {
                             "type": "string",
-                            "description": "The SSL Mode for the PostgreSQL database",
-                            "default": "prefer"
-                        },
-                        "timeout": {
-                            "type": "string",
-                            "description": "Define a timeout for the database connection",
-                            "default": "\"\""
-                        },
-                        "certs": {
-                            "type": "object",
-                            "properties": {
-                                "rootCert": {
-                                    "type": "string",
-                                    "description": "The path to a mounted TLS root certificate",
-                                    "default": "\"\""
-                                },
-                                "cert": {
-                                    "type": "string",
-                                    "description": "The path to a mounted TLS certificate",
-                                    "default": "\"\""
-                                },
-                                "key": {
-                                    "type": "string",
-                                    "description": "The path to a mounted TLS certificate key",
-                                    "default": "\"\""
-                                }
-                            }
+                            "description": "The Options to use for the PostgreSQL database, see https://docs.paperless-ngx.com/configuration/#PAPERLESS_DB_OPTIONS",
+                            "default": "sslmode=prefer"
                         }
                     }
                 },
