@@ -304,25 +304,9 @@ paperless:
     ## @param paperless.postgresql.existingSecret [string] An existing BasicAuth secret containing the PostgreSQL credentials
     ##
     existingSecret: ""
-    ## @param paperless.postgresql.sslMode [default: prefer] The SSL Mode for the PostgreSQL database
+    ## @param paperless.postgresql.options [default: sslmode=prefer] The Options for the PostgreSQL database
     ##
-    sslMode: "prefer"
-    ## @param paperless.postgresql.timeout [string] Define a timeout for the database connection
-    ##
-    timeout: ""
-
-    ## PostgreSQL certificates configuration
-    ##
-    certs:
-      ## @param paperless.postgresql.certs.rootCert [string] The path to a mounted TLS root certificate
-      ##
-      rootCert: ""
-      ## @param paperless.postgresql.certs.cert [string] The path to a mounted TLS certificate
-      ##
-      cert: ""
-      ## @param paperless.postgresql.certs.key [string] The path to a mounted TLS certificate key
-      ##
-      key: ""
+    options: "sslmode=prefer"
 
   ## Tika configuration
   ##
